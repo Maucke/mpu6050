@@ -124,7 +124,7 @@
      /**
       * @brief Create and init sensor object and return a sensor handle
       *
-      * @param port I2C bus handle
+      * @param port I2C port number
       * @param dev_addr I2C device address of sensor
       *
       * @return

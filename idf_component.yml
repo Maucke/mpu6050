@@ -3,4 +3,6 @@ dependencies:
     version: '>=5.0'
 description: I2C driver for MPU6050 6-axis gyroscope and accelerometer
 url: https://github.com/Maucke/mpu6050
-version: 1.0.0
+version: 1.0.1
+
+#compote component upload --namespace Maucke --name mpu6050
