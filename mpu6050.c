@@ -119,7 +119,7 @@
  
  esp_err_t mpu6050_config(mpu6050_handle_t sensor, const mpu6050_acce_fs_t acce_fs, const mpu6050_gyro_fs_t gyro_fs)
  {
-     uint8_t config_regs[2] = {static_cast<uint8_t>(gyro_fs << 3), static_cast<uint8_t>(acce_fs << 3)};
+     uint8_t config_regs[2] = {(uint8_t)(gyro_fs << 3), (uint8_t)(acce_fs << 3)};
      return mpu6050_write(sensor, MPU6050_GYRO_CONFIG, config_regs, sizeof(config_regs));
  }
  
@@ -253,7 +253,7 @@
      }
  
      gpio_config_t int_gpio_config = {
-         .pin_bit_mask = static_cast<uint64_t>(BIT0 << interrupt_configuration->interrupt_pin),
+         .pin_bit_mask = (uint64_t)(BIT0 << interrupt_configuration->interrupt_pin),
          .mode = GPIO_MODE_INPUT,
          .intr_type = gpio_intr_type};
  
