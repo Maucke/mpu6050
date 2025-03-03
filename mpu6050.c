@@ -19,6 +19,8 @@
  #define MPU6050_ACCEL_CONFIG 0x1Cu
  #define MPU6050_INTR_PIN_CFG 0x37u
  #define MPU6050_INTR_ENABLE 0x38u
+ #define MPU6050_INTR_THRESHOLD 0x1Fu
+ #define MPU6050_INTR_DURATION 0x20u
  #define MPU6050_INTR_STATUS 0x3Au
  #define MPU6050_ACCEL_XOUT_H 0x3Bu
  #define MPU6050_GYRO_XOUT_H 0x43u
@@ -65,7 +67,7 @@
  mpu6050_handle_t mpu6050_create(i2c_bus_handle_t bus, uint8_t dev_addr)
  {
      mpu6050_dev_t *sens = (mpu6050_dev_t *)calloc(1, sizeof(mpu6050_dev_t));
-     sens->i2c_dev = i2c_bus_device_create(bus, dev_addr, i2c_bus_get_current_clk_speed(bus));    
+     sens->i2c_dev = i2c_bus_device_create(bus, dev_addr, i2c_bus_get_current_clk_speed(bus));
      if (sens->i2c_dev == NULL)
      {
          free(sens);
@@ -479,3 +481,14 @@
      return ESP_OK;
  }
  
+ esp_err_t mpu6050_enable_motiondetection(mpu6050_handle_t sensor, uint8_t threshold, uint8_t duration)
+ {
+     esp_err_t ret;
+     uint8_t enabled_interrupts = 0x01;
+ 
+     ret = mpu6050_write(sensor, MPU6050_INTR_ENABLE, &enabled_interrupts, 1);
+     ret = mpu6050_write(sensor, MPU6050_INTR_THRESHOLD, &threshold, 1);
+     ret = mpu6050_write(sensor, MPU6050_INTR_DURATION, &duration, 1);
+ 
+     return ret;
+ }

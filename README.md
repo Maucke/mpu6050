@@ -38,3 +38,5 @@ Another option is to manually create a `idf_component.yml` file. You can find mo
 * [Sensors example, including the MPU6050 driver](https://github.com/espressif/esp-bsp/tree/master/examples/sensors_example)
 * [MPU6050 datasheet](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
 * [MPU6000 and MPU6050 register map](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Register-Map1.pdf)
+
+#### compote component upload --namespace Maucke --name mpu6050

@@ -407,6 +407,22 @@
      esp_err_t mpu6050_complimentory_filter(mpu6050_handle_t sensor, const mpu6050_acce_value_t *const acce_value,
                                             const mpu6050_gyro_value_t *const gyro_value, complimentary_angle_t *const complimentary_angle);
  
+     /**
+      * @brief Enable motion detection on MPU6050.
+      *
+      * Configures the MPU6050 to detect motion based on a specified threshold and duration.
+      * When motion acceleration exceeds the threshold for the set duration, an interrupt is triggered.
+      *
+      * @param sensor Handle to the MPU6050 sensor instance.
+      * @param threshold Motion detection sensitivity (0 - 255). Higher value means less sensitive.
+      * @param duration Motion duration (0 - 255) required to trigger the interrupt.
+      *
+      * @return
+      *     - ESP_OK: Success
+      *     - ESP_FAIL: Failure
+      */
+     esp_err_t mpu6050_enable_motiondetection(mpu6050_handle_t sensor, uint8_t threshold, uint8_t duration);
+ 
  #ifdef __cplusplus
  }
  #endif
