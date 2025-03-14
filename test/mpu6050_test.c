@@ -43,17 +43,22 @@ static void i2c_sensor_mpu6050_init(void)
 {
     esp_err_t ret;
     mpu6050 = mpu6050_create(i2c_bus, MPU6050_I2C_ADDRESS);
-    ESP_ERROR_CHECK(mpu6050_config(mpu6050, ACCE_FS_4G, GYRO_FS_500DPS));
-    ESP_ERROR_CHECK(mpu6050_wake_up(mpu6050));
-
+    ESP_ERROR_CHECK(mpu6050_init(mpu6050));
+    ESP_ERROR_CHECK(mpu6050_enable_motiondetection(mpu6050, 1, 20));
 }
 
 void app_main(void)
 {
     i2c_bus_init();
     i2c_sensor_mpu6050_init();
-    while(1)
+    while (1)
     {
+        bool active = false;
+        mpu6050_getMotionInterruptStatus(mpu6050, &active);
+        if (active)
+        {
+            ESP_LOGI(TAG, "mpu6050 int");
+        }
         vTaskDelay(1000);
     }
 }
